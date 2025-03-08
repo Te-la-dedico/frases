@@ -6,6 +6,11 @@
     <title>Mensajes Deslizantes</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
         body {
             display: flex;
             flex-direction: column;
@@ -15,32 +20,33 @@
             background: linear-gradient(to bottom, #a8e6ff, #ffb6c1);
             overflow: hidden;
             text-align: center;
+            padding: 20px;
         }
         .title {
-            font-size: 30px; /* Tamaño más grande */
+            font-size: 24px; /* Ajuste de tamaño para móviles */
             font-weight: bold;
-            color: green; /* Color verde */
+            color: green;
             margin-bottom: 20px;
+            text-align: center;
         }
         .container {
             position: relative;
-            width: 400px;
-            height: 200px;
-            background: rgba(255, 255, 255, 0.8);
+            width: 90%; /* Se adapta mejor a pantallas pequeñas */
+            max-width: 400px; /* No crece más de este tamaño */
+            height: auto;
+            background: rgba(255, 255, 255, 0.9);
             border-radius: 10px;
             padding: 20px;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
         }
-        .message, .subtext {
-            transition: opacity 0.5s ease-in-out;
-        }
         .message {
-            font-size: 20px;
+            font-size: 18px; /* Ajuste para mejor legibilidad */
             font-weight: bold;
             opacity: 1;
+            word-wrap: break-word;
         }
         .subtext {
-            font-size: 18px;
+            font-size: 16px;
             font-family: 'Dancing Script', cursive;
             margin-top: 10px;
             opacity: 1;

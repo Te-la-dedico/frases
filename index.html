@@ -23,7 +23,7 @@
             padding: 20px;
         }
         .title {
-            font-size: 24px; /* Ajuste de tamaño para móviles */
+            font-size: 24px;
             font-weight: bold;
             color: green;
             margin-bottom: 20px;
@@ -31,25 +31,24 @@
         }
         .container {
             position: relative;
-            width: 90%; /* Se adapta mejor a pantallas pequeñas */
-            max-width: 400px; /* No crece más de este tamaño */
+            width: 90%;
+            max-width: 400px;
             height: auto;
             background: rgba(255, 255, 255, 0.9);
             border-radius: 10px;
             padding: 20px;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
         }
-        .message {
-            font-size: 18px; /* Ajuste para mejor legibilidad */
+        .message, .subtext {
+            font-size: 18px;
             font-weight: bold;
-            opacity: 1;
             word-wrap: break-word;
+            transition: opacity 0.5s ease-in-out; /* Animación de desvanecimiento */
         }
         .subtext {
             font-size: 16px;
             font-family: 'Dancing Script', cursive;
             margin-top: 10px;
-            opacity: 1;
         }
         .arrows {
             display: flex;
@@ -102,12 +101,12 @@
         }
 
         function nextMessage() {
-            index = (index + 1) % messages.length; // Bucle infinito
+            index = (index + 1) % messages.length;
             updateMessage();
         }
 
         function prevMessage() {
-            index = (index - 1 + messages.length) % messages.length; // Bucle infinito
+            index = (index - 1 + messages.length) % messages.length;
             updateMessage();
         }
     </script>

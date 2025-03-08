@@ -1,0 +1,109 @@
+<!DOCTYPE html> 
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mensajes Deslizantes</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to bottom, #a8e6ff, #ffb6c1);
+            overflow: hidden;
+            text-align: center;
+        }
+        .title {
+            font-size: 30px; /* Tamaño más grande */
+            font-weight: bold;
+            color: green; /* Color verde */
+            margin-bottom: 20px;
+        }
+        .container {
+            position: relative;
+            width: 400px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .message, .subtext {
+            transition: opacity 0.5s ease-in-out;
+        }
+        .message {
+            font-size: 20px;
+            font-weight: bold;
+            opacity: 1;
+        }
+        .subtext {
+            font-size: 18px;
+            font-family: 'Dancing Script', cursive;
+            margin-top: 10px;
+            opacity: 1;
+        }
+        .arrows {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .arrow {
+            font-size: 30px;
+            cursor: pointer;
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="title">Frases de personajes que yo te la dedico</div>
+    <div class="container">
+        <div class="message" id="message">“Prefiero morir mañana que vivir cien años sin haberte conocido”.</div>
+        <div class="subtext" id="subtext">"Pocahontas"</div>
+        <div class="arrows">
+            <span class="arrow" onclick="prevMessage()">⬅</span>
+            <span class="arrow" onclick="nextMessage()">➡</span>
+        </div>
+    </div>
+    <script>
+        const messages = [
+            { text: "Prefiero morir mañana que vivir cien años sin haberte conocido", subtext: "Pocahontas" },
+            { text: "El amor es una canción que nunca termina", subtext: "Bambi" },
+            { text: "La gente hace cosas locas cuando está enamorada", subtext: "Hércules" },
+            { text: "Cuando amas a alguien, permanece dentro de tu corazón para siempre", subtext: "Tierra de Osos" }
+        ];
+        
+        let index = 0;
+        
+        function updateMessage() {
+            const messageEl = document.getElementById("message");
+            const subtextEl = document.getElementById("subtext");
+
+            // Desvanecer texto
+            messageEl.style.opacity = "0";
+            subtextEl.style.opacity = "0";
+
+            setTimeout(() => {
+                messageEl.innerText = messages[index].text;
+                subtextEl.innerText = messages[index].subtext;
+
+                // Reaparecer texto
+                messageEl.style.opacity = "1";
+                subtextEl.style.opacity = "1";
+            }, 500);
+        }
+
+        function nextMessage() {
+            index = (index + 1) % messages.length; // Bucle infinito
+            updateMessage();
+        }
+
+        function prevMessage() {
+            index = (index - 1 + messages.length) % messages.length; // Bucle infinito
+            updateMessage();
+        }
+    </script>
+</body>
+</html>

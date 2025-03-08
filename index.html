@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -6,97 +6,118 @@
     <title>Mensajes Deslizantes</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&display=swap');
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        
         body {
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
             height: 100vh;
             background: linear-gradient(to bottom, #a8e6ff, #ffb6c1);
             overflow: hidden;
             text-align: center;
-            padding: 20px;
         }
-        .title {
-            font-size: 24px;
-            font-weight: bold;
+        
+        h1 {
             color: green;
+            font-size: 24px;
             margin-bottom: 20px;
-            text-align: center;
         }
+
         .container {
             position: relative;
-            width: 90%;
+            width: 80%;
             max-width: 400px;
-            height: auto;
-            background: rgba(255, 255, 255, 0.9);
+            min-height: 200px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.8);
             border-radius: 10px;
             padding: 20px;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
         }
-        .message, .subtext {
-            font-size: 18px;
+
+        .message {
+            font-size: 20px;
             font-weight: bold;
-            word-wrap: break-word;
-            transition: opacity 0.5s ease-in-out; /* Animación de desvanecimiento */
+            opacity: 1;
+            transition: opacity 0.5s ease-in-out;
         }
+
+        .hidden {
+            opacity: 0;
+        }
+
         .subtext {
-            font-size: 16px;
+            font-size: 18px;
             font-family: 'Dancing Script', cursive;
             margin-top: 10px;
         }
+
         .arrows {
             display: flex;
             justify-content: space-between;
             margin-top: 20px;
         }
+
         .arrow {
             font-size: 30px;
             cursor: pointer;
             user-select: none;
         }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: green;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
-    <div class="title">Frases de personajes que yo te la dedico</div>
+
+    <h1>Frases de personajes que yo te la dedico</h1>
+
     <div class="container">
         <div class="message" id="message">“Prefiero morir mañana que vivir cien años sin haberte conocido”.</div>
-        <div class="subtext" id="subtext">"Pocahontas"</div>
+        <div class="subtext" id="subtext">Pocahontas</div>
         <div class="arrows">
             <span class="arrow" onclick="prevMessage()">⬅</span>
             <span class="arrow" onclick="nextMessage()">➡</span>
         </div>
     </div>
+
+    <button onclick="playMusic()">Reproducir música de fondo mientras lees</button>
+
+    <audio id="background-music" src="https://www.dropbox.com/s/llbx9hr0thxj8mu/M%C3%BAsica%20ROM%C3%81NTICA%20sin%20Copyright%20-%20Libre%20Uso.mp3?raw=1"></audio>
+
     <script>
         const messages = [
             { text: "Prefiero morir mañana que vivir cien años sin haberte conocido", subtext: "Pocahontas" },
             { text: "El amor es una canción que nunca termina", subtext: "Bambi" },
             { text: "La gente hace cosas locas cuando está enamorada", subtext: "Hércules" },
-            { text: "Cuando amas a alguien, permanece dentro de tu corazón para siempre", subtext: "Tierra de Osos" }
+            { text: "Cuando amas a alguien, permanece dentro de tu corazón para siempre", subtext: "Tierra de Osos" },
+            { text: "Mi sueño no estaría completo sin ti", subtext: "La princesa y el sapo" },
+            { text: "Cuando te veo me siento en casa", subtext: "Buscando a Nemo" },
+            { text: "No tendría nada si no te tuviera", subtext: "Monsters Inc" },
+            { text: "Déjame compartir este nuevo mundo contigo", subtext: "Aladdin" }
         ];
-        
-        let index = 0;
-        
-        function updateMessage() {
-            const messageEl = document.getElementById("message");
-            const subtextEl = document.getElementById("subtext");
 
-            // Desvanecer texto
-            messageEl.style.opacity = "0";
-            subtextEl.style.opacity = "0";
+        let index = 0;
+
+        function updateMessage() {
+            const messageElem = document.getElementById("message");
+            const subtextElem = document.getElementById("subtext");
+
+            messageElem.classList.add("hidden");
 
             setTimeout(() => {
-                messageEl.innerText = messages[index].text;
-                subtextEl.innerText = messages[index].subtext;
-
-                // Reaparecer texto
-                messageEl.style.opacity = "1";
-                subtextEl.style.opacity = "1";
+                messageElem.innerText = messages[index].text;
+                subtextElem.innerText = messages[index].subtext;
+                messageElem.classList.remove("hidden");
             }, 500);
         }
 
@@ -109,6 +130,12 @@
             index = (index - 1 + messages.length) % messages.length;
             updateMessage();
         }
+
+        function playMusic() {
+            const audio = document.getElementById("background-music");
+            audio.play();
+        }
     </script>
+
 </body>
 </html>
